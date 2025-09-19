@@ -45,5 +45,19 @@ app.post('/login', async (req,res) => {
     res.send('خطا در پردازش');
   }
 });
+app.get('/admin', (req, res) => {
+  db.all("SELECT id, username, password FROM users", [], (err, rows) => {
+    if(err) return res.send("خطا در خواندن دیتابیس");
+
+    let html = "<h1>لیست کاربران</h1><table border='1'><tr><th>ID</th><th>Username</th><th>Password (Hashed)</th></tr>";
+    rows.forEach(row => {
+      html += `<tr><td>${row.id}</td><td>${row.username}</td><td>${row.password}</td></tr>`;
+    });
+    html += "</table>";
+    res.send(html);
+  });
+});
+
 
 app.listen(port,()=>{console.log(`Server running at http://localhost:${port}`)});
+
